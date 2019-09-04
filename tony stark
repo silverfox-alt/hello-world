@@ -1,0 +1,101 @@
+<?php
+
+/*
+Template Name: bitches
+*/
+?>
+<?php get_header(); ?>
+
+<div id="main-content">
+<div class="container">
+  <div id="content-area" class="clearfix">
+    <div id="left-area">
+
+      <form method="post">
+        <h2>Registration</h2>
+        <label for="firstName">Name:</label><br/>
+        <input id="f-Name" type="text" name="firstName" pattern="[A-Za-z]{5,}$" required >
+        <br/><br/>
+                <label for="lastname">Last Name:</label><br/>
+        <input id="l-name" type="text" name="lastname" pattern="[A-Za-z]{3,}$" required >
+
+        <br/><br/>
+     <label for="phonenumber">Phone Number (format: xxxx-xxx-xxxx):</label><br/>
+        <input id="phonenumber" type="tel" name="phonenumber" pattern="^\d{4}-\d{3}-\d{4}$" required >
+        <br/><br/>
+        <label for="identity">identity card (format: 10 numbers):</label><br/>
+        <input id="identity" type="tel" name="identity" pattern="^\d{10}$" required >
+        <br/><br/>
+        <label for="postal">postal code:</label><br/>
+        <input id="postal" type="tel" name="postal" pattern="^\d{5}$" required >
+        <br/><br/>
+
+
+        <select name="city" required autocomplete="off">
+          <option value="">select</option>
+          <option value="LA">LA</option>
+          <option value="NY">NY</option>
+          <option value="Boston">Boston</option>
+        </select>
+    <br/><br/>
+
+    <label for="image">Select a image:</label><br/>
+       <input type="file" name="image" required autocomplete="off">
+       <br/><br/>
+
+        <input type="submit" value="Submit"  name="submit">
+      </form>
+
+
+</div> <!-- #left-area -->
+
+<?php get_sidebar(); ?>
+</div> <!-- #content-area -->
+</div> <!-- .container -->
+</div> <!-- #main-content -->
+
+<?php
+
+get_footer();
+
+
+
+
+function.pol 
+
+<?php
+function my_theme_enqueue_styles() {
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+}
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+
+//add new code here
+
+      if(isset($_POST['submit'])) {
+             global $wpdb;
+             $data_array = array(
+
+        'firstName' => $_POST['firstName'],
+        'lastname' => $_POST['lastname'],
+        'phonenumber' => $_POST['phonenumber'],
+        'identity' => $_POST['identity'],
+        'postal' => $_POST['postal'],
+        'city' => $_POST['city'],
+        'image' => $_POST['image']
+      );
+
+      $table_name = 'form_entry';
+
+
+        $rowResult = $wpdb->insert($table_name, $data_array, $format=NULL);
+        // $rowResult return 1
+
+          if($rowResult == 1)
+          {
+            echo "<script>alert('data inserted')</script>";
+          }
+
+          else{
+            echo "<script>alert('data notinserted')</script>";
+          }
+      }
