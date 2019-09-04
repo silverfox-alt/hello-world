@@ -1,0 +1,141 @@
+<form action="" method="post">
+<label>نام و نام خانوادگی:</label><input type="text" name="name" /><br />
+<label>پست الکترونیکی:</label><input type="text" name="email" /><br />
+<label>شماره تماس:</label><input type="text" name="phonenumber" /><br />
+<label>موضوع پیام:</label><input type="text" name="subject" /><br />
+<label>متن پیام:</label><textarea name="message"></textarea><br />
+<input type="submit" value="ارسال" name="submit" />
+</form>
+
+
+
+      if(isset($_POST['submit'])){
+      if($_POST['name']=='' or $_POST['email']=='' or $_POST['phonenumber']=='' or $_POST['subject']=='' or $_POST['message']==''){
+      echo '<div>لطفاً اطلاعات را به صورت کامل تکمیل کنید.</div>';
+      }else{
+      echo '<div>';
+      echo 'اطلاعات با موفقیت ارسال شد.';
+      echo '<br />';
+      echo $name=$_POST['name'];
+      echo '<br />';
+      echo $email=$_POST['email'];
+      echo '<br />';
+      echo $phonenumber=$_POST['phonenumber'];
+      echo '<br />';
+      echo $subject=$_POST['subject'];
+      echo '<br />';
+      echo $message=$_POST['message'];
+      echo '</div>';
+
+      $to='Your E-Mail Here';
+      $subject=$subject;
+      $from=$email;
+      $headers='Content-type: text/html; charset=utf-8' . "\r\n";
+      $headers.="From:$from To $to";
+      $body=
+      "<div style=\"font-size:12px;font-family:tahoma;direction:rtl;text-align:right;line-height:35px;\"><b>نام و نام خانوادگی:</b> $name\n</div>".
+      "<div style=\"font-size:12px;font-family:tahoma;direction:rtl;text-align:right;line-height:35px;\"><b>پست الکترونیک:</b> $email\n</div>".
+      "<div style=\"font-size:12px;font-family:tahoma;direction:rtl;text-align:right;line-height:35px;\"><b>شماره تماس:</b> $phonenumber\n</div>".
+      "<div style=\"font-size:12px;font-family:tahoma;direction:rtl;text-align:right;line-height:35px;\"><b>موضوع پیام:</b> $subject\n</div>".
+      "<div style=\"font-size:12px;font-family:tahoma;direction:rtl;text-align:right;line-height:35px;\"><b>متن پیام:</b> $message\n</div>";
+      global $wpdb;
+      mail($to,$subject,$body,$headers);
+      }
+      }
+
+
+      if(isset($_POST['submit'])) {
+        if($_POST['name']=='') {
+          echo "<script type='text/javascript'>alert('Name is required');</script>";
+        }
+
+          else {
+            echo "<script type='text/javascript'>alert('name is ok bitch');</script>";
+          }
+
+
+
+
+      if(isset($_POST['submit'])) {
+        if (isset($_POST["name"])) {
+          echo 'Name is required';
+        } else {
+          $name = isset($_POST["name"]);
+          // check if name only contains letters and whitespace
+          if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+            echo 'Name is required';
+          }
+        }
+
+        if (empty($_POST["email"])) {
+          echo 'Email is required';
+        } else {
+          $email = isset($_POST["email"]);
+          // check if e-mail address is well-formed
+          if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          echo 'Invalid email format';
+          }
+        }
+
+        if (empty($_POST["website"])) {
+          echo  'Invalid URL';
+        } else {
+          $website = isset($_POST["website"]);
+          // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+          if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+            echo  'Invalid URL';
+          }
+        }
+
+        if (empty($_POST["comment"])) {
+          $comment = "";
+        } else {
+          $comment = isset($_POST["comment"]);
+        }
+
+        if (empty($_POST["gender"])) {
+          $genderErr = "Gender is required";
+        } else {
+          $gender = isset($_POST["gender"]);
+        }
+
+        global $wpdb;
+
+
+
+        if (isset($_POST["email"])) {
+          echo "<script type='text/javascript'>alert('Email is required');</script>";
+        } else {
+          $email = isset($_POST["email"]);
+          // check if e-mail address is well-formed
+          if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          echo "<script type='text/javascript'>alert('Invalid email format');</script>";
+          }
+        }
+
+          autocomplete="off"
+
+
+          <br/><br/>
+          <label for="phonenum">Phone Number (format: xxxx-xxx-xxxx):</label><br/>
+          <input id="phonenum" type="tel" name="phonenum" pattern="^\d{4}-\d{3}-\d{4}$" required >
+          <br/><br/>
+          <label for="identity">identity card (format: 10 numbers):</label><br/>
+          <input id="identity" type="tel" name="identity" pattern="^\d{10}$" required >
+          <br/><br/>
+          <label for="postal">postal code:</label><br/>
+          <input id="postal" type="tel" name="postal" pattern="^\d{5}$" required >
+          <br/><br/>
+
+
+          <select name="city" required autocomplete="off">
+            <option value="">select</option>
+            <option value="LA">LA</option>
+            <option value="NY">NY</option>
+            <option value="Boston">Boston</option>
+          </select>
+      <br/><br/>
+
+      <label for="image">Select a image:</label><br/>
+         <input type="file" name="image" required autocomplete="off">
+         <br/><br/>
